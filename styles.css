@@ -1,0 +1,344 @@
+:root{
+  /* base / default theme tokens (before any search) */
+  --bg-1:#dfe5ec;
+  --bg-2:#c3ccd6;
+  --accent-color:#3d5a80;
+  --ink:#1a2233;
+  --ink-soft:#4c5566;
+  --card:#ffffff;
+  --card-line:#d7dce2;
+  --text-on-accent:#ffffff;
+  --radius:18px;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+
+body{
+  min-height:100vh;
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+  background:linear-gradient(160deg,var(--bg-1),var(--bg-2));
+  transition:background 700ms ease;
+  display:flex;
+  justify-content:center;
+  padding:32px 16px 60px;
+}
+
+.app{width:100%;max-width:920px;}
+
+header.top{
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+  margin-bottom:22px;
+}
+header.top .icon{font-size:28px;}
+header.top h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;
+  font-size:clamp(22px,4vw,30px);
+  letter-spacing:-0.02em;
+  margin:0;
+}
+header.top .sub{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--ink-soft);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+}
+
+/* search bar */
+form.search{
+  display:flex;
+  gap:10px;
+  background:var(--card);
+  border:1px solid var(--card-line);
+  border-radius:14px;
+  padding:8px;
+  box-shadow:0 6px 20px -12px rgba(20,30,50,0.25);
+  margin-bottom:22px;
+}
+form.search input[type="text"]{
+  flex:1;
+  border:none;
+  outline:none;
+  background:transparent;
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  padding:10px 12px;
+  color:var(--ink);
+}
+.unit-toggle{
+  display:flex;
+  align-items:center;
+  border:1px solid var(--card-line);
+  border-radius:10px;
+  overflow:hidden;
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+}
+.unit-toggle button{
+  border:none;
+  background:transparent;
+  padding:9px 12px;
+  cursor:pointer;
+  color:var(--ink-soft);
+  font-family:inherit;
+  font-weight:500;
+}
+.unit-toggle button.active{
+  background:var(--accent-color);
+  color:var(--text-on-accent);
+}
+.geo-btn{
+  border:1px solid var(--card-line);
+  background:transparent;
+  border-radius:10px;
+  padding:9px 12px;
+  cursor:pointer;
+  font-size:15px;
+  line-height:1;
+}
+.geo-btn:hover{background:#f2f4f7;}
+button.submit{
+  border:none;
+  border-radius:10px;
+  padding:9px 18px;
+  background:var(--accent-color);
+  color:var(--text-on-accent);
+  font-weight:600;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  transition:opacity 200ms, transform 150ms;
+}
+button.submit:hover{transform:translateY(-1px);}
+button.submit:disabled{opacity:0.55;cursor:progress;transform:none;}
+
+.history{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:-10px 0 22px;
+}
+.history button{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  border:1px dashed var(--card-line);
+  background:rgba(255,255,255,0.5);
+  color:var(--ink-soft);
+  padding:5px 10px;
+  border-radius:20px;
+  cursor:pointer;
+}
+.history button:hover{border-color:var(--accent-color);color:var(--accent-color);}
+
+.error-banner{
+  background:#fdecec;
+  border:1px solid #f3b7b7;
+  color:#8a2c2c;
+  padding:12px 14px;
+  border-radius:10px;
+  margin-bottom:20px;
+  font-size:14px;
+}
+
+/* ticket-style dual card: current weather + packing, joined like a boarding-pass stub */
+.ticket{
+  display:none;
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 20px 40px -22px rgba(20,30,50,0.35);
+  overflow:hidden;
+  margin-bottom:26px;
+}
+.ticket.show{display:grid;grid-template-columns:1.15fr 1fr;}
+@media (max-width:680px){
+  .ticket.show{grid-template-columns:1fr;}
+}
+
+.stub{padding:26px 24px;position:relative;}
+.stub.weather{
+  background:linear-gradient(150deg,var(--accent-color),color-mix(in srgb, var(--accent-color) 60%, #000));
+  color:var(--text-on-accent);
+}
+.stub.packing{background:var(--card);color:var(--ink);}
+
+/* perforated divider mimicking a tear-off ticket edge */
+.ticket.show .stub.weather{
+  border-right:2px dashed rgba(255,255,255,0.35);
+}
+@media (max-width:680px){
+  .ticket.show .stub.weather{border-right:none;border-bottom:2px dashed var(--card-line);}
+}
+
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  opacity:0.85;
+  margin:0 0 10px;
+}
+.city-name{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;
+  font-size:26px;
+  margin:0 0 4px;
+  letter-spacing:-0.01em;
+}
+.condition-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+  font-size:15px;
+  opacity:0.95;
+}
+.condition-row .cond-icon{font-size:26px;}
+
+.temp-big{
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:52px;
+  line-height:1;
+  margin-bottom:16px;
+  letter-spacing:-0.02em;
+}
+.stat-row{
+  display:flex;
+  gap:22px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+}
+.stat-row .stat-label{opacity:0.7;display:block;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;}
+
+/* die-cut notch to sell the "ticket" motif */
+.stub.weather::after, .stub.weather::before{
+  content:"";
+  position:absolute;
+  width:22px;height:22px;
+  background:var(--card);
+  border-radius:50%;
+  right:-11px;
+}
+.stub.weather::after{top:-11px;}
+.stub.weather::before{bottom:-11px;}
+@media (max-width:680px){
+  .stub.weather::after, .stub.weather::before{display:none;}
+}
+
+.packing h3{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:16px;
+  margin:0 0 4px;
+}
+.packing .packing-context{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--ink-soft);
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  margin:0 0 16px;
+}
+.checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+.checklist li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+  padding:9px 12px;
+  border:1px solid var(--card-line);
+  border-radius:10px;
+  background:#fafbfc;
+}
+.checklist li .tick{
+  width:18px;height:18px;
+  border-radius:5px;
+  border:1.5px solid var(--accent-color);
+  flex-shrink:0;
+}
+
+/* forecast row */
+.forecast-wrap{display:none;}
+.forecast-wrap.show{display:block;}
+.forecast-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:600;
+  font-size:15px;
+  margin:0 0 12px;
+  color:var(--ink);
+}
+.forecast-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+@media (max-width:600px){
+  .forecast-grid{grid-template-columns:1fr;}
+}
+.fcard{
+  background:var(--card);
+  border:1px solid var(--card-line);
+  border-radius:14px;
+  padding:16px;
+  text-align:center;
+}
+.fcard .fday{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--ink-soft);
+  margin-bottom:8px;
+}
+.fcard .ficon{font-size:30px;margin-bottom:6px;}
+.fcard .frange{
+  font-family:'JetBrains Mono',monospace;
+  font-size:15px;
+  font-weight:600;
+}
+.fcard .frange .lo{color:var(--ink-soft);font-weight:400;}
+
+/* loading skeleton */
+.skeleton{display:none;}
+.skeleton.show{display:block;}
+.skel-ticket{
+  height:220px;border-radius:var(--radius);
+  background:linear-gradient(90deg,#eceff2 25%,#f7f8fa 37%,#eceff2 63%);
+  background-size:400% 100%;
+  animation:shimmer 1.3s ease infinite;
+  margin-bottom:26px;
+}
+.skel-forecast{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media (max-width:600px){.skel-forecast{grid-template-columns:1fr;}}
+.skel-fcard{
+  height:110px;border-radius:14px;
+  background:linear-gradient(90deg,#eceff2 25%,#f7f8fa 37%,#eceff2 63%);
+  background-size:400% 100%;
+  animation:shimmer 1.3s ease infinite;
+}
+@keyframes shimmer{0%{background-position:100% 0;}100%{background-position:0 0;}}
+
+.empty-state{
+  text-align:center;
+  padding:60px 20px;
+  color:var(--ink-soft);
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+}
+.empty-state .big{font-size:40px;display:block;margin-bottom:10px;}
+
+footer.credit{
+  text-align:center;
+  margin-top:30px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--ink-soft);
+  opacity:0.7;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+}
