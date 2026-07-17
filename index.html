@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather &amp; Packing Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+ 
+  <header class="top">
+    <span class="icon">🧳</span>
+    <div>
+      <h1>Weather &amp; Packing Planner</h1>
+      <div class="sub">check the sky, pack accordingly</div>
+    </div>
+  </header>
+ 
+  <form class="search" id="searchForm" autocomplete="off">
+    <input type="text" id="cityInput" placeholder="Search for a city... (e.g., London)" aria-label="City name">
+    <div class="unit-toggle" role="group" aria-label="Units">
+      <button type="button" id="unitC" class="active">°C</button>
+      <button type="button" id="unitF">°F</button>
+    </div>
+    <button type="button" class="geo-btn" id="geoBtn" title="Use my location">📍</button>
+    <button type="submit" class="submit" id="submitBtn">Search</button>
+  </form>
+ 
+  <div class="history" id="historyRow"></div>
+ 
+  <div class="error-banner" id="errorBanner" style="display:none;"></div>
+ 
+  <!-- loading skeleton -->
+  <div class="skeleton" id="skeleton">
+    <div class="skel-ticket"></div>
+    <div class="skel-forecast">
+      <div class="skel-fcard"></div><div class="skel-fcard"></div><div class="skel-fcard"></div>
+    </div>
+  </div>
+ 
+  <div class="empty-state" id="emptyState">
+    <span class="big">🌤️</span>
+    Search a city to see the current weather and what to pack.
+  </div>
+ 
+  <!-- current weather + packing "ticket" -->
+  <section class="ticket" id="ticket">
+    <div class="stub weather">
+      <p class="eyebrow">Current Weather</p>
+      <h2 class="city-name" id="cityName">—</h2>
+      <div class="condition-row"><span class="cond-icon" id="condIcon">—</span><span id="condLabel">—</span></div>
+      <div class="temp-big" id="tempBig">—</div>
+      <div class="stat-row">
+        <div><span class="stat-label">Humidity</span><span id="humidityVal">—</span></div>
+        <div><span class="stat-label">Wind</span><span id="windVal">—</span></div>
+        <div><span class="stat-label">Feels like</span><span id="feelsVal">—</span></div>
+      </div>
+    </div>
+    <div class="stub packing">
+      <h3>Packing Recommendations</h3>
+      <p class="packing-context" id="packingContext">—</p>
+      <ul class="checklist" id="packingList"></ul>
+    </div>
+  </section>
+ 
+  <!-- 3-day forecast -->
+  <section class="forecast-wrap" id="forecastWrap">
+    <p class="forecast-title">3-Day Extended Forecast</p>
+    <div class="forecast-grid" id="forecastGrid"></div>
+  </section>
+ 
+  <!-- <footer class="credit">Data via Open-Meteo — no API key required</footer> -->
+</div>
+ 
+<!-- config.js must load before script.js: it defines CONFIG -->
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
